@@ -1,0 +1,25 @@
+.row
+  - if @projects.present?
+    - @projects.each do |project|
+      .col-md-4
+        .bs-component
+          .panel.panel-default
+            .panel-body
+              .col-md-6
+                = link_to image_tag(project.image_logo_url, width: '150'), project_path(project)
+              .col-md-6
+                %p
+                  %b Início
+                %p= project.start.strftime('%d/%m/%Y') 
+                %p
+                  %b Fim
+                %p= project.end.strftime('%d/%m/%Y')
+                %p
+                  %b Situação
+                %p em andamento
+  - else
+    não existem concursos ativos.
+%hr/
+.row
+  .col-md-12
+    = link_to 'Novo concurso', new_project_path, class: 'btn btn-success btn-sm' if policy(:project).new?

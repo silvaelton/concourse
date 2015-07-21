@@ -1,0 +1,7 @@
+.bs-component
+  .alert.alert-dismissible.alert-success
+    %button.close{"data-dismiss" => "alert", :type => "button"} ×
+    %p
+      texto,
+      = link_to "<b>realizar acesso</b>".html_safe, new_user_session_path
+%hr/

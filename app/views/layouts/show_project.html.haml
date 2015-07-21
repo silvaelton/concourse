@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Concourse
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    = render 'layouts/partials/nav'
+    .container
+      .row
+        .col-md-12
+          = render 'layouts/partials/alert_signin' unless user_signed_in?
+      .row
+        .col-md-12
+          .panel.panel-default
+            .panel-body
+              = image_tag @project.image_header_url, width: 300
+      %hr/
+      .row
+        .col-md-3
+          = render 'layouts/partials/candidate_sidebar_nav'  if user_signed_in? && !policy(:user).administrator?
+          = render 'layouts/partials/sidebar_nav' 
+          = render 'layouts/partials/admin_sidebar_nav' if user_signed_in? && policy(:user).administrator?
+        .col-md-9
+          .panel.panel-default
+            .panel-body
+              = yield
+      .row
+        .col-md-12
+          = @project.image_footer_url

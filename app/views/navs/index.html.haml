@@ -1,0 +1,19 @@
+%h1 Listing navs
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @navs.each do |nav|
+      %tr
+        %td= link_to 'Show', nav
+        %td= link_to 'Edit', edit_nav_path(nav)
+        %td= link_to 'Destroy', nav, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Nav', new_nav_path

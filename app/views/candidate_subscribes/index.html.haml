@@ -1,0 +1,19 @@
+%h1 Listing candidate_subscribes
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @candidate_subscribes.each do |candidate_subscribe|
+      %tr
+        %td= link_to 'Show', candidate_subscribe
+        %td= link_to 'Edit', edit_candidate_subscribe_path(candidate_subscribe)
+        %td= link_to 'Destroy', candidate_subscribe, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Candidate subscribe', new_candidate_subscribe_path

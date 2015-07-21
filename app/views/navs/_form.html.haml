@@ -1,0 +1,9 @@
+= simple_form_for([:project, @nav]) do |f|
+  = f.error_notification
+  = f.input :nav_type
+  = f.association :page
+  = f.input :url
+  = f.input :target
+  = f.input :order
+  = f.input :publish
+  = f.button :submit

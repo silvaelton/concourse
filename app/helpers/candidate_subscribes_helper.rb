@@ -1,0 +1,2 @@
+module CandidateSubscribesHelper
+end
