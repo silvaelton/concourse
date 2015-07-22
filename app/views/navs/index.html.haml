@@ -1,19 +1,45 @@
-%h1 Listing navs
+.row
+  .col-md-12
+    %h3
+      %b Menus
 
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @navs.each do |nav|
-      %tr
-        %td= link_to 'Show', nav
-        %td= link_to 'Edit', edit_nav_path(nav)
-        %td= link_to 'Destroy', nav, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Nav', new_nav_path
+.row
+  .col-md-12
+    = link_to 'Novo Menu', new_project_nav_path(@project), class: 'pull-right btn btn-warning btn-sm'
+%hr/
+.row
+  .col-md-12
+    %table.table.table-condesed.table-striped
+      %thead
+        %tr
+          %th #
+          %th Título
+          %th Tipo
+          %th Página
+          %th URL
+          %th Status
+          %th Ordem
+          %th Ações
+    
+      %tbody
+        - @navs.each_with_index do |nav, index|
+          %tr
+            %td= index + 1
+            %td= nav.title
+            %td= nav.created_at.strftime('%d/%m/%Y')
+            %td= nav.page.title if nav.page.present?
+            %td= nav.url
+            %td= publish_helper nav.publish
+            %td.col-md-2
+              - if @navs.count > 1
+                - if index == 0
+                  = link_to 'Descer', project_nav_switch_up_path(nav_id: nav), class: 'btn btn-default btn-xs'
+                - elsif @navs.count - 1 == index
+                  = link_to 'Subir', project_nav_switch_down_path(nav_id: nav), class: 'btn btn-default btn-xs'
+                - else
+                  = link_to 'Descer', project_nav_switch_up_path(nav_id: nav), class: 'btn btn-default btn-xs'
+                  = link_to 'Subir', project_nav_switch_down_path(nav_id: nav), class: 'btn btn-default btn-xs'
+            %td.col-md-2
+              = link_to 'Editar', edit_project_nav_path(project_id: @project, id: nav)
+              = link_to 'Remover', project_nav_path(project_id: @project, id: nav), :method => :delete, :data => { :confirm => t(:confirm_destroy) }
+    

@@ -3,7 +3,7 @@ class CreateProjects < ActiveRecord::Migration
     create_table :projects do |t|
       t.string :title
       t.string :slug, unique: true
-      t.string :description
+      t.text :description
       t.date :start
       t.date :end
       t.boolean :publish

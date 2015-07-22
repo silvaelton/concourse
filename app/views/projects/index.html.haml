@@ -1,4 +1,12 @@
 .row
+  .col-md-12
+    %h3
+      %B Concursos 
+.row
+  .col-md-12
+    = link_to 'Novo concurso', new_project_path, class: 'btn btn-success btn-sm pull-right' if user_signed_in? && policy(:project).new?
+%hr/
+.row
   - if @projects.present?
     - @projects.each do |project|
       .col-md-4
@@ -19,7 +27,3 @@
                 %p em andamento
   - else
     não existem concursos ativos.
-%hr/
-.row
-  .col-md-12
-    = link_to 'Novo concurso', new_project_path, class: 'btn btn-success btn-sm' if policy(:project).new?

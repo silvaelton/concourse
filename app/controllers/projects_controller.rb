@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     authorize :project, :edit?
+    render layout: 'layouts/show_project'
   end
 
   # POST /projects
@@ -41,7 +42,7 @@ class ProjectsController < ApplicationController
     authorize :project, :edit?
     if @project.update(project_params)
       flash[:success] = t :success
-      redirect_to action: 'index'
+      redirect_to @project
     else
       render :edit
     end

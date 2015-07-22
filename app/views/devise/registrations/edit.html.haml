@@ -1,0 +1,32 @@
+.row
+  .col-md-12
+    %h2
+      %b
+        Editar Minha Conta
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-body
+        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+          = f.error_notification
+          .row
+            .col-md-12
+              = f.input :email, required: true, autofocus: true
+          .row
+            .col-md-4
+              = f.input :current_password, hint: "necessário informar a senha atual", required: true
+            .col-md-4
+              = f.input :password, autocomplete: "off", hint: "deixando em branco, sua senha não ira ser alterada", required: false
+            .col-md-4
+              = f.input :password_confirmation, required: false
+          %hr/
+          .row
+            .col-md-12
+              = f.button :submit, "Atualizar minha conta", class: 'btn btn-warning'
+          %hr/
+          .row
+            .col-md-12
+              %h3 Cancelar minha conta
+              %p
+              #{link_to "Desejo cancelar minha conta", registration_path(resource_name), data: { confirm: "Tem certeza que deseja cancelar sua conta? Todos os seus dados serão perdidos." }, method: :delete}
+        

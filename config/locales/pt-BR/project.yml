@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      project: 'Concurso'
+    attributes:
+      project:
+        title: "Título"
+        description: "Descrição"
+        start: "Início"
+        end: "Fim"
+        image_header: "Cabeçalho"
+        image_logo: "Logo"
+        image_footer: "Rodapé"
+        publish: "Publicado"
+        status: "Status"

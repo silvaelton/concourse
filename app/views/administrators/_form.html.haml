@@ -1,0 +1,25 @@
+= simple_form_for @user, url: administrators_path  do |f|
+  .row
+    .col-md-12
+      = f.error_notification
+  .row
+    .col-md-4
+      = f.input :email
+    .col-md-4
+      = f.input :password
+    .col-md-4
+      = f.input :password_confirmation
+  .row
+    .col-md-4
+      = f.input :administrator, as: :select
+    .col-md-4
+      = f.input :privilege, as: :select, collection: User::privileges.keys.to_a, prompt: 'selecione...'
+  %hr/
+  .row
+    .col-md-4
+      %h4
+        %b Concursos com acesso
+  %hr/
+  .row
+    .col-md-12
+      = f.button :submit, class: 'btn btn-warning'

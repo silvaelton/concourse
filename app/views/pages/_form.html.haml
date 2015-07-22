@@ -1,7 +1,19 @@
 = simple_form_for([@project, @page]) do |f|
-  = f.error_notification
 
-  .form-inputs
-
-  .form-actions
-    = f.button :submit
+  .row
+    .col-md-12
+      = f.error_notification
+  .row
+    .col-md-12
+      = f.input :title
+  .row
+    .col-md-12
+      = f.input :content
+  .row
+    .col-md-12
+      = f.input :publish
+  %hr/
+  .row
+    .col-md-12
+      = f.button :submit, class: 'btn btn-warning'
+      = link_to "voltar", project_pages_path(@project), class: 'btn btn-default'

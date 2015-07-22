@@ -1,0 +1,11 @@
+pt-BR:
+  consult_save: "Sua consulta foi registrada com sucesso!"
+  consult_error: "Sua consulta não pôde ser processada! Tente novamente."
+  activerecord:
+    models:
+      consult: 'Consulta'
+    attributes:
+      consult:
+        title: "Título"
+        content: "Descrição"
+        

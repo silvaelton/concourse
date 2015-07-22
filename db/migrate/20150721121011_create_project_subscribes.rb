@@ -8,6 +8,7 @@ class CreateProjectSubscribes < ActiveRecord::Migration
       t.date :end
       t.boolean :fee
       t.float :fee_value
+      t.string :form_code
       t.boolean :publish
 
       t.timestamps null: false

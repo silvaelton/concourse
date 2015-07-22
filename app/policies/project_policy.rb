@@ -5,15 +5,15 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def new?
-    true
+    user.administrator && user.manager?
   end
 
   def edit?
-    true
+    user.administrator && user.manager?
   end
 
   def destroy?
-    true
+    user.administrator && user.manager?
   end
 
 end

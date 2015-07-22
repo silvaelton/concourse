@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      project_subscribe: 'Inscrição'
+    attributes:
+      project_subscribe:
+        title: "Título"
+        description: "Descrição"
+        start: "Ínicio"
+        end: "Fim"
+        fee: "Taxa?"
+        fee_value: "Valor"
+        publish: "Publicado"

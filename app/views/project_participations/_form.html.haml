@@ -1,0 +1,24 @@
+= simple_form_for([@project, @project_participation]) do |f|
+  .row
+    .col-md-12
+      = f.error_notification
+  .row
+    .col-md-6
+      = f.association :project_subscribe
+  .row
+    .col-md-12
+      = f.input :title
+  .row
+    .col-md-3
+      = f.input :start, as: 'string', input_html: { class: 'date',  value: (@project_participation.start) ? localize(f.object.start) : nil}
+    .col-md-3
+      = f.input :end, as: 'string', input_html: { class: 'date',  value: (@project_participation.end) ? localize(f.object.end) : nil}
+    .col-md-2
+      = f.input :form_code, as: :string
+    .col-md-2
+      = f.input :publish, as: :select, prompt: 'selecione...'
+  %hr/
+  .row
+    .col-md-12
+      = f.button :submit, class: 'btn btn-warning'
+      = link_to "voltar", project_project_participations_path(@project), class: 'btn btn-default'

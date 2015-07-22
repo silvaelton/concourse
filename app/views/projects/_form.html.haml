@@ -1,12 +1,48 @@
 = simple_form_for(@project) do |f|
-  = f.error_notification
-  = f.input :title
-  = f.input :description
-  = f.input :start, as: 'string', input_html: { class: 'date',  value: (@project.start) ? localize(f.object.start) : nil}
-  = f.input :end, as: 'string', input_html: { class: 'date',  value: (@project.end) ? localize(f.object.end) : nil}
-  = f.input :publish
-  = f.input :status
-  = f.input :image_header, as: 'file'
-  = f.input :image_logo, as: 'file'
-  = f.input :image_footer, as: 'file'
-  = f.button :submit
+  .row
+    .col-md-12
+      = f.error_notification
+  .row
+    .col-md-12
+      = f.input :title
+  .row
+    .col-md-12
+      = f.input :description
+  .row
+    .col-md-3
+      = f.input :start, as: 'string', input_html: { class: 'date',  value: (@project.start) ? localize(f.object.start) : nil}
+    .col-md-3
+      = f.input :end, as: 'string', input_html: { class: 'date',  value: (@project.end) ? localize(f.object.end) : nil}
+  %hr/
+  .row
+    .col-md-3
+      = f.input :image_header, as: 'file'
+    .col-md-3
+      = image_tag @project.image_header_url, width: 200 if @project.image_header?
+  %hr/
+  .row
+    .col-md-3
+      = f.input :image_logo, as: 'file'
+    .col-md-3
+      = image_tag @project.image_logo_url, width: 80  if @project.image_logo?
+  %hr/
+  .row
+    .col-md-3
+      = f.input :image_footer, as: 'file'
+    .col-md-3
+      = image_tag @project.image_footer_url, width: 500 if @project.image_footer?
+  %hr/
+  .row
+    .col-md-6
+      = f.input :publish
+    .col-md-6
+      = f.input :status
+
+  %hr/
+  .row
+    .col-md-12
+      = f.button :submit, class: 'btn btn-warning'
+      - if @project.new_record?
+        = link_to "voltar", projects_path, class: 'btn btn-default'
+      - else
+        = link_to "voltar", project_path(@project), class: 'btn btn-default' 

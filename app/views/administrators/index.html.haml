@@ -1,0 +1,40 @@
+.row
+  .col-md-12
+    %h1
+      %b Acessos
+
+%hr/
+.row
+  .col-md-12
+    = link_to 'Novo Usuário', new_administrator_path, class: 'pull-right btn btn-success btn-xs'
+%hr/
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-body
+        %table.table.table-striped
+          %thead
+            %tr
+              %th #
+              %th E-mail
+              %th Criado em
+              %th Último acesso
+              %th Permissão
+              %th Ações
+        
+          %tbody
+            - @users.each_with_index do |administrator, index|
+              %tr
+                %td= index + 1
+                %td= administrator.email
+                %td= administrator.created_at.strftime("%d/%m/%Y")
+                %td= administrator.last_sign_in_at.strftime("%d/%m/%Y às %H:%M")
+                %td= administrator.privilege
+                %td
+                  = link_to 'Edit', edit_administrator_path(administrator) if current_user.id != administrator.id 
+        
+                  = link_to 'Destroy', administrator_path(administrator), :method => :delete, :data => { :confirm => t(:confirm_destroy) } if current_user.id != administrator.id 
+        
+
+    
+    

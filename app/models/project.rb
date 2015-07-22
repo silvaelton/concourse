@@ -1,6 +1,9 @@
 class Project < ActiveRecord::Base
   has_many :pages
   has_many :navs
+  has_many :project_subscribes
+  has_many :project_participations
+  has_many :consults
 
   extend FriendlyId
 

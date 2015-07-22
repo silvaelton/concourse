@@ -1,9 +1,10 @@
 class NavsController < ApplicationController
-  before_action :set_nav, only: [:show, :edit, :update, :destroy]
+  layout 'layouts/show_project'
   before_action :set_project
+  before_action :set_nav, only: [:show, :edit, :update, :destroy]
   # GET /navs
   def index
-    @navs = Nav.all
+    @navs = @project.navs.unscoped.order(:order)
   end
 
   # GET /navs/1
@@ -24,7 +25,8 @@ class NavsController < ApplicationController
     @nav = @project.navs.new(nav_params)
 
     if @nav.save
-      redirect_to @nav, notice: 'Nav was successfully created.'
+      flash[:success] = t :success
+      redirect_to action: 'index'
     else
       render :new
     end
@@ -33,27 +35,53 @@ class NavsController < ApplicationController
   # PATCH/PUT /navs/1
   def update
     if @nav.update(nav_params)
-      redirect_to @nav, notice: 'Nav was successfully updated.'
+      flash[:success] = t :success
+      redirect_to action: 'index'
     else
       render :edit
     end
   end
 
+
+  def switch_up
+    @nav = @project.navs.unscoped.find(params[:nav_id])
+    if @nav.switch_up
+      flash[:success] = t :success    
+      redirect_to action: 'index'
+    else
+      flash[:danger] = t :error    
+      redirect_to action: 'index'
+    end
+  end
+
+  def switch_down
+    @nav = @project.navs.unscoped.find(params[:nav_id])
+    if @nav.switch_down
+      flash[:success] = t :success    
+      redirect_to action: 'index'
+    else
+      flash[:danger] = t :error    
+      redirect_to action: 'index'
+    end
+  end
+
   # DELETE /navs/1
   def destroy
-    @nav.destroy
-    redirect_to navs_url, notice: 'Nav was successfully destroyed.'
+    if @nav.destroy
+      flash[:success] = t :success
+      redirect_to action: 'index'
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_nav
-      @nav = Nav.find(params[:id])
+      @nav = @project.navs.unscoped.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def nav_params
-      params[:nav]
+      params.require(:nav).permit(:title, :nav_type, :page_id, :url, :target, :publish)
     end
 
     def set_project

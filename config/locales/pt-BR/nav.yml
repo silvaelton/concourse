@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      nav: 'Menu'
+    attributes:
+      nav:
+        title: "Título"
+        nav_type: "Tipo"
+        page: "Página"
+        url: "URL"
+        target: "Ação ao clicar"
+        publish: "Publicado"

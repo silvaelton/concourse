@@ -19,14 +19,21 @@
               = image_tag @project.image_header_url, width: 300
       %hr/
       .row
+        .col-md-12
+          - flash.each do |key, value|
+            %div{:class => "alert alert-#{key}"}= value
+      .row
         .col-md-3
-          = render 'layouts/partials/candidate_sidebar_nav'  if user_signed_in? && !policy(:user).administrator?
+          - if user_signed_in? 
+            = render 'layouts/partials/candidate_sidebar_nav' if policy(:user).candidate?
+            = render 'layouts/partials/admin_sidebar_nav'     if policy(:user).administrator?
+            %hr/
           = render 'layouts/partials/sidebar_nav' 
-          = render 'layouts/partials/admin_sidebar_nav' if user_signed_in? && policy(:user).administrator?
         .col-md-9
           .panel.panel-default
             .panel-body
               = yield
+      %hr/
       .row
         .col-md-12
-          = @project.image_footer_url
+          = image_tag @project.image_footer_url, width: '100%'

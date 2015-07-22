@@ -1,0 +1,15 @@
+pt-BR:
+  consult_save: "Sua consulta foi registrada com sucesso!"
+  consult_error: "Sua consulta não pôde ser processada! Tente novamente."
+  activerecord:
+    models:
+      user: 'Usuário'
+    attributes:
+      user:
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de Senha"
+        current_password: "Senha atual"
+        administrator: "Coordenação"
+        privilege: "privilégio de acesso"
+        

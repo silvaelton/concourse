@@ -4,6 +4,7 @@
       %li.list-group-item= link_to "Inscrições", '#'
       %li.list-group-item= link_to "Participações", '#'
       %li.list-group-item= link_to "Vencedores", '#'
+      %li.list-group-item= link_to "Consultas", project_consults_path(@project)
 %hr/
 .row
   .col-md-12
@@ -11,6 +12,5 @@
       %li.list-group-item= link_to "Gerenciar Informações", edit_project_path(@project)
       %li.list-group-item= link_to "Gerenciar Páginas", project_pages_path(@project)
       %li.list-group-item= link_to "Gerenciar Menus", project_navs_path(@project)
-      %li.list-group-item= link_to "Gerenciar Inscrições", project_subscribes_path(@project)
-      %li.list-group-item= link_to "Gerenciar Participações", project_participations_path(@project)
-%hr/
+      %li.list-group-item= link_to "Gerenciar Inscrições", project_project_subscribes_path(@project)
+      %li.list-group-item= link_to "Gerenciar Participações", project_project_participations_path(@project)

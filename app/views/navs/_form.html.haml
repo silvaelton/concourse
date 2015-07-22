@@ -1,9 +1,22 @@
-= simple_form_for([:project, @nav]) do |f|
+= simple_form_for([@project, @nav]) do |f|
   = f.error_notification
-  = f.input :nav_type
-  = f.association :page
-  = f.input :url
-  = f.input :target
-  = f.input :order
-  = f.input :publish
-  = f.button :submit
+  .row
+    .col-md-12
+      = f.input :title
+  .row
+    .col-md-2
+      = f.input :nav_type, as: :select, collection: Nav::nav_types.keys.to_a, prompt: 'selecione...'
+    .col-md-5
+      = f.association :page, prompt: "selecione..."
+    .col-md-5
+      = f.input :url, input_html: { placeholder: "Digite uma url externa..."}
+  .row
+    .col-md-2
+      = f.input :target, as: :select, collection: Nav::targets.keys.to_a, prompt: 'selecione...'
+    .col-md-2
+      = f.input :publish, as: :select, prompt: 'selecione...'
+  %hr/
+  .row
+    .col-md-12
+      = f.button :submit, class: 'btn btn-warning'
+      = link_to "voltar", project_navs_path(@project), class: 'btn btn-default'

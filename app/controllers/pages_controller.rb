@@ -1,11 +1,13 @@
 class PagesController < ApplicationController
+  layout 'show_project'
+  
   before_action :set_page, only: [:show, :edit, :update, :destroy]
   before_action :set_project
 
 
   # GET /pages
   def index
-    @pages = @project.pages
+    @pages = @project.pages.unscoped
   end
 
   # GET /pages/1
@@ -26,7 +28,8 @@ class PagesController < ApplicationController
     @page = @project.pages.new(page_params)
 
     if @page.save
-      redirect_to @page, notice: 'Page was successfully created.'
+      flash[:success] = t :success
+      redirect_to action: 'index'
     else
       render :new
     end
@@ -35,7 +38,8 @@ class PagesController < ApplicationController
   # PATCH/PUT /pages/1
   def update
     if @page.update(page_params)
-      redirect_to @page, notice: 'Page was successfully updated.'
+      flash[:success] = t :success
+      redirect_to action: 'index'
     else
       render :edit
     end
@@ -43,19 +47,21 @@ class PagesController < ApplicationController
 
   # DELETE /pages/1
   def destroy
-    @page.destroy
-    redirect_to pages_url, notice: 'Page was successfully destroyed.'
+    if @page.destroy
+      flash[:success] = t :success
+      redirect_to action: 'index'
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = Page.unscoped.find(params[:id])
+      @page = Page.unscoped.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def page_params
-      params[:page]
+      params.require(:page).permit(:title, :content, :publish)
     end
 
     def set_project

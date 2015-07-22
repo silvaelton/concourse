@@ -11,23 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721200028) do
+ActiveRecord::Schema.define(version: 20150722170936) do
 
   create_table "candidate_subscribes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "consults", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "title"
+    t.text     "content"
+    t.boolean  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "consults", ["project_id"], name: "index_consults_on_project_id"
+
   create_table "navs", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "page_id"
+    t.string   "title"
     t.integer  "nav_type"
     t.string   "url"
     t.integer  "target"
-    t.integer  "order"
+    t.integer  "order",      default: 0
     t.boolean  "publish"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "navs", ["page_id"], name: "index_navs_on_page_id"
@@ -49,14 +61,14 @@ ActiveRecord::Schema.define(version: 20150721200028) do
     t.string   "title"
     t.integer  "project_id"
     t.integer  "project_subscribe_id"
-    t.integer  "form_id"
-    t.integer  "form_code"
+    t.date     "start"
+    t.date     "end"
+    t.string   "form_code"
     t.boolean  "publish"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
 
-  add_index "project_participations", ["form_id"], name: "index_project_participations_on_form_id"
   add_index "project_participations", ["project_id"], name: "index_project_participations_on_project_id"
   add_index "project_participations", ["project_subscribe_id"], name: "index_project_participations_on_project_subscribe_id"
 
@@ -68,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150721200028) do
     t.date     "end"
     t.boolean  "fee"
     t.float    "fee_value"
+    t.string   "form_code"
     t.boolean  "publish"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -78,7 +91,7 @@ ActiveRecord::Schema.define(version: 20150721200028) do
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
-    t.string   "description"
+    t.text     "description"
     t.date     "start"
     t.date     "end"
     t.boolean  "publish"
@@ -105,7 +118,9 @@ ActiveRecord::Schema.define(version: 20150721200028) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.integer  "privilege",              default: 0
     t.boolean  "administrator",          default: false
+    t.string   "name"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end

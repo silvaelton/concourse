@@ -4,5 +4,8 @@ class UserPolicy < ApplicationPolicy
     user.administrator?
   end
 
+  def candidate?
+    !user.administrator?
+  end
 
 end

@@ -1,0 +1,27 @@
+.row
+  .col-md-5.col-md-offset-3
+    .panel.panel-default
+      .panel-body
+        .col-md-12
+          .row
+            .col-md-12
+              %h3 
+                %b Quero me Cadastrar
+          %hr/
+          = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            .row
+              .col-md-12
+                = f.input :name, required: false, autofocus: true
+              .col-md-12
+                = f.input :email, required: false, autofocus: true
+            .row
+              .col-md-12
+                = f.input :password, required: false
+            .row
+              .col-md-12
+                = f.input :password_confirmation, required: true
+            %hr/
+            .row
+              .col-md-12
+                = f.button :submit, "Realizar Cadastro", class: 'btn btn-warning btn-sm'
+        .col-md-2

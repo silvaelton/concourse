@@ -4,17 +4,30 @@ Rails.application.routes.draw do
   root 'projects#index'
   
   devise_for :users
+  
+  resources :administrators, path: 'coordenadores'
 
-  resources :users
   resources :reports
 
-  resources :projects,  path: 'concursos' do 
-    resources :navs,            path: 'menus'
-    resources :pages,           path: 'paginas'
-    resources :subscribes,      path: 'gestao_inscricoes'
-    resources :participations,  path: 'participacoes'
+  resources :candidates do 
+    collection do 
+      get 'subscribes', to: 'candidates#subscribes'
+      get 'participations', to: 'candidates#participations'
+    end
+  end
 
-    resources :candidate_subscribes, path: 'inscricoes'
+  resources :projects,  path: 'concursos' do 
+    resources :navs,    path: 'menus' do 
+      get 'switch_up'
+      get 'switch_down'
+    end
+    resources :pages,                   path: 'paginas'
+    resources :project_subscribes,      path: 'gestao_inscricoes' do 
+      resources :forms
+    end
+    resources :project_participations,  path: 'participacoes'
+    resources :candidate_subscribes,    path: 'inscricoes'
+    resources :consults,                path: 'consultas' 
   end
 
   scope 'api' do 

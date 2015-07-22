@@ -1,0 +1,37 @@
+.row
+  .col-md-10.col-md-offset-1
+    .panel.panel-default
+      .panel-body
+        .col-md-5
+          .row
+            .col-md-12{'style':'text-align: center; padding-top:35%'}
+              %h3 
+                %b Eu não possuo cadastro
+              %h3 
+                %b= link_to "Quero me cadastrar", new_user_registration_path
+        .col-md-2
+        .col-md-5
+          .row
+            .col-md-12
+              %h3 
+                %b Realizar Acesso
+          %hr/
+          = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+            .row
+              .col-md-12
+                = f.input :email, required: false, autofocus: true
+            .row
+              .col-md-12
+                = f.input :password, required: false
+            .row
+              .col-md-12
+                = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+            %hr/
+            %br/
+            %br/
+            .row
+              .col-md-6
+                = f.button :submit, "Realizar acesso", class: 'btn btn-warning'
+              .col-md-6
+                = render "devise/shared/links"
+        

@@ -1,6 +1,17 @@
-
+- unless user_signed_in?
+  .row
+    .col-md-12
+      %ul.list-group
+        %li.list-group-item= link_to "Área do Candidato"
+        %li.list-group-item= link_to "Nova Consulta", new_project_consult_path(@project)
+  %hr/  
 .row
   .col-md-12
     %ul.list-group
       %li.list-group-item= link_to "Início", project_path(@project)
+      - @project.navs.order(:order).each do |nav|
+        - if nav.page? && nav.page.present?
+          %li.list-group-item= link_to "#{nav.title}", project_page_path(project_id: @project, id: nav.page), target: "#{nav.target}"
+        - else
+          %li.list-group-item= link_to "#{nav.title}", nav.url, target: "#{nav.target}"
 %hr/

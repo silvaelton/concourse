@@ -1,0 +1,31 @@
+ geral
+   ☐ desenhar fluxo de criação de novo concurso
+  
+ candidato
+   ☐ realizar inscrição
+   ☐ enviar email sobre a inscrição
+   ☐ emitir boleto
+   ☐ responder mensagens sobre a inscrição
+   ☐ minhas inscrições
+   ☐ validações de inscrição
+   ☐ minhas participações
+
+visual
+  ☐ melhorias de menu
+  ☐ melhorias em cards de concursos
+  ☐ melhorias de visual de edição de dados
+
+ administrador
+  ☐ receber inscrição
+  ☐ enviar mensagens internas e externas sobre o candidato
+  ☐ homologar candidato
+  ☐ enviar email para candidato sobre a homologação
+  ☐ receber projeto de candidato
+  ☐ emitir relatório de projetos
+  ☐ inserir vencedor do concurso
+  ☐ task para upload de pagamentos de boletos
+  ☐ inserir permissões de acesso
+  ☐ inserir permissão de gerenciamento por concurso
+  ☐ visualizar boletos emitidos
+  ☐ relatorios financeiros
+  ☐ relatorios de participação

@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      project_participation: 'Participação'
+    attributes:
+      project_participation:
+        title: "Título"
+        project_subscribe: "Inscrição Referência"
+        start: "Ínicio"
+        end: "Fim"
+        form_code: "Código"
+        publish: "Publicado"
