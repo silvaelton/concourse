@@ -1,9 +1,8 @@
-module Form
-  class Smarca
-    include ActiveModel::Model
+class Form::Smarca < ActiveRecord::Base
+  has_one :candidate_subscribe, as: :form
+  accepts_nested_attributes_for :candidate_subscribe
 
-    attr_accessor :name
+  validates_presence_of :name, :cpf, :telephone, :teste
 
-    validates :name, presence: true
-  end
+  mount_uploader :teste, FileUploader
 end

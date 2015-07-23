@@ -1,0 +1,25 @@
+* {
+   background:transparent !important;
+   color:#000 !important;
+   text-shadow:none !important;
+   filter:none !important;
+   -ms-filter:none !important;
+ }
+  
+ body {
+   margin:0;
+   padding:0;
+   line-height: 1.4em;
+ }
+ .print {
+   display:block;
+ }
+
+ .no-print { 
+   display:none; 
+ }
+
+table.barby-barcode { border-spacing: 0; }
+tr.barby-row {}
+td.barby-cell { width: 1px; height: 45px; }
+td.barby-cell.on { background: #000; }

@@ -11,11 +11,13 @@ Rails.application.routes.draw do
 
   resources :candidates do 
     collection do 
-      get 'subscribes', to: 'candidates#subscribes'
-      get 'participations', to: 'candidates#participations'
+      get 'subscribes',         to: 'candidates#subscribes',     as: 'subscribes'
+      get 'subscribe/:id',      to: 'candidates#show_subscribe', as: 'show_subscribe'
+      get 'participations',     to: 'candidates#participations', as: 'participations'
+      get 'generate_slip/:id',  to: 'candidates#bank_slip',      as: 'bank_slip'
     end
   end
-
+  
   resources :projects,  path: 'concursos' do 
     resources :navs,    path: 'menus' do 
       get 'switch_up'
@@ -26,7 +28,6 @@ Rails.application.routes.draw do
       resources :forms
     end
     resources :project_participations,  path: 'participacoes'
-    resources :candidate_subscribes,    path: 'inscricoes'
     resources :consults,                path: 'consultas' 
   end
 

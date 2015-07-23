@@ -21,6 +21,10 @@ gem 'carrierwave'
 gem 'friendly_id', '~> 5.1.0'
 gem 'validates_timeliness', '~> 3.0'
 
+gem 'chunky_png'
+gem 'barby'
+gem 'rqrcode'
+
 group :production do 
   gem 'pg'
 end

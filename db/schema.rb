@@ -11,12 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722170936) do
+ActiveRecord::Schema.define(version: 20150723123337) do
 
   create_table "candidate_subscribes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "project_subscribe_id"
+    t.integer  "form_id"
+    t.string   "form_type"
+    t.integer  "status",               default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
+
+  add_index "candidate_subscribes", ["form_id"], name: "index_candidate_subscribes_on_form_id"
+  add_index "candidate_subscribes", ["form_type"], name: "index_candidate_subscribes_on_form_type"
+  add_index "candidate_subscribes", ["project_subscribe_id"], name: "index_candidate_subscribes_on_project_subscribe_id"
+  add_index "candidate_subscribes", ["user_id"], name: "index_candidate_subscribes_on_user_id"
 
   create_table "consults", force: :cascade do |t|
     t.integer  "project_id"
@@ -28,6 +38,16 @@ ActiveRecord::Schema.define(version: 20150722170936) do
   end
 
   add_index "consults", ["project_id"], name: "index_consults_on_project_id"
+
+  create_table "form_smarcas", force: :cascade do |t|
+    t.string   "name"
+    t.string   "cpf"
+    t.string   "telephone"
+    t.string   "rg"
+    t.string   "teste"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "navs", force: :cascade do |t|
     t.integer  "project_id"
@@ -91,7 +111,8 @@ ActiveRecord::Schema.define(version: 20150722170936) do
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
-    t.text     "description"
+    t.string   "description"
+    t.text     "apresentation"
     t.date     "start"
     t.date     "end"
     t.boolean  "publish"
@@ -99,8 +120,8 @@ ActiveRecord::Schema.define(version: 20150722170936) do
     t.string   "image_header"
     t.string   "image_logo"
     t.string   "image_footer"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|

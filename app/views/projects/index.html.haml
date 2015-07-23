@@ -1,29 +1,23 @@
 .row
-  .col-md-12
-    %h3
-      %B Concursos 
-.row
-  .col-md-12
-    = link_to 'Novo concurso', new_project_path, class: 'btn btn-success btn-sm pull-right' if user_signed_in? && policy(:project).new?
-%hr/
-.row
-  - if @projects.present?
-    - @projects.each do |project|
-      .col-md-4
-        .bs-component
-          .panel.panel-default
-            .panel-body
-              .col-md-6
-                = link_to image_tag(project.image_logo_url, width: '150'), project_path(project)
-              .col-md-6
-                %p
-                  %b Início
-                %p= project.start.strftime('%d/%m/%Y') 
-                %p
-                  %b Fim
-                %p= project.end.strftime('%d/%m/%Y')
-                %p
-                  %b Situação
-                %p em andamento
-  - else
-    não existem concursos ativos.
+  .col-md-1
+    .row
+      = link_to "novo concurso", new_project_path
+    .row
+  .col-md-11
+    - if @projects.present?
+      - @projects.each do |project|
+        .col-md-3
+          .bs-component
+            .panel.panel-default
+              .panel-body{'style':'height: 250px;'}
+                .row
+                  .col-md-10
+                    %h4
+                      %b.project-link= link_to project.title, project_path(project)
+                .row
+                  .col-md-12
+                    .title-opacity= project.description 
+  
+      
+    - else
+      não existem concursos ativos.

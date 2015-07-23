@@ -4,7 +4,7 @@ class BankSlip
   attr_accessor :product_identifier, :segment, :real_value_identifier, :check_digit, :value, :free_field, :cnpj
   attr_accessor :barcode, :deadline, :cpf, :unique_code, :barcode_no_digit, :barcode_with_digit, :barcode_with_all_digit
   attr_accessor :block_one, :block_two, :block_three, :block_four
-  attr_accessor :block_digit_one, :block_digit_two, :block_digit_three, :block_digit_four
+  attr_accessor :block_digit_one, :block_digit_two, :block_digit_three, :block_digit_four, :block_formated_full, :block_no_formated_full
  
   validates_presence_of :value, :deadline 
   validates :value, numericality: true
@@ -116,15 +116,17 @@ class BankSlip
     self.block_digit_three = calc block_three
     self.block_digit_four  = calc block_four
     #retorna montagem
-    "#{block_one}#{block_digit_one}#{block_two}#{block_digit_two}#{block_three}#{block_digit_three}#{block_four}#{block_digit_four}"
+    self.block_formated_full = "#{block_one}-#{block_digit_one} #{block_two}-#{block_digit_two} #{block_three}-#{block_digit_three} #{block_four}-#{block_digit_four}"
+    self.block_no_formated_full =  "#{block_one}#{block_digit_one}#{block_two}#{block_digit_two}#{block_three}#{block_digit_three}#{block_four}#{block_digit_four}"
   end
   
   def format_barcode_no_digit
     "#{self.product_identifier}#{self.segment}#{self.real_value_identifier}#{self.value}#{self.cnpj}#{self.free_field}"
   end
   def format_value(value)
-    return nil if value.class != Integer || value.nil?
+    return nil if value.class != Float && value.class != Integer || value.nil? 
    
+    value = '%.2f' % value
     value = value.to_s.gsub('.','')
     '%011d' % value.to_i
   end

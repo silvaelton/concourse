@@ -4,37 +4,41 @@
       %b Inscrições
 .row
   .col-md-12
-    = link_to 'Nova inscrição', new_project_project_subscribe_path(@project), class: 'pull-right btn btn-warning btn-sm'
+    = link_to 'Nova inscrição', new_project_project_subscribe_path(@project), class: 'pull-right btn btn-warning btn-sm' if user_signed_in? && policy(:project_subscribe).new?
 %hr/
 .row
   .col-md-12
-    %table.table.table-striped
-      %thead
-        %tr
-          %th #
-          %th Título
-          %th Início
-          %th Fim
-          %th Taxa de inscrição
-          - if policy(:user).administrator?
-            %th Publicada?
-            %th Code
-          %th Ações
-    
-      %tbody
-        - @project_subscribes.each_with_index do |project_subscribe, index|
+    - if @project_subscribes.present?
+      %table.table.table-striped
+        %thead
           %tr
-            %td= index + 1
-            %td= project_subscribe.title
-            %td= project_subscribe.start.strftime('%d/%m/%Y')
-            %td= project_subscribe.end.strftime('%d/%m/%Y')
-            %td= number_to_currency project_subscribe.fee_value if project_subscribe.fee
+            %th #
+            %th Título
+            %th Início
+            %th Fim
+            %th Taxa de inscrição
             - if policy(:user).administrator?
-              %td= publish_helper project_subscribe.publish
-              %td= project_subscribe.form_code
-              %td.col-md-2
-                = link_to 'Editar', edit_project_project_subscribe_path(project_id: @project, id: project_subscribe)
-                = link_to 'Remover', project_project_subscribe_path(project_id: @project, id: project_subscribe), :method => :delete, :data => { :confirm => t(:confirm_destroy) }
-            - if policy(:user).candidate?
-              %td= link_to "Relizar Inscrição", new_project_project_subscribe_form_path(project_id: @project, project_subscribe_id: project_subscribe)
-        
+              %th Publicada?
+              %th Code
+            %th Ações
+      
+        %tbody
+          - @project_subscribes.each_with_index do |project_subscribe, index|
+            %tr
+              %td= index + 1
+              %td= project_subscribe.title
+              %td= project_subscribe.start.strftime('%d/%m/%Y')
+              %td= project_subscribe.end.strftime('%d/%m/%Y')
+              %td= number_to_currency project_subscribe.fee_value if project_subscribe.fee
+              - if policy(:user).administrator?
+                %td= publish_helper project_subscribe.publish
+                %td= project_subscribe.form_code
+                %td.col-md-2
+                  = link_to 'Editar', edit_project_project_subscribe_path(project_id: @project, id: project_subscribe)
+                  = link_to 'Remover', project_project_subscribe_path(project_id: @project, id: project_subscribe), :method => :delete, :data => { :confirm => t(:confirm_destroy) }
+              - if policy(:user).candidate? && policy(:form).new?(project_subscribe.id)
+                %td= link_to "Relizar Inscrição", new_project_project_subscribe_form_path(project_id: @project, project_subscribe_id: project_subscribe)
+              - else
+                %td inscrição já realizada
+    - else
+      Não existem inscrições abertas    

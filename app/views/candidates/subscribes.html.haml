@@ -1,0 +1,35 @@
+.row
+  .col-md-12
+    %h3
+      %b Minhas Inscrições
+
+%hr/
+.row
+  .col-md-2
+  .col-md-10
+    .panel.panel-default
+      .panel-body
+        %table.table.table-striped
+          %thead
+            %tr
+              %th #
+              %th Concurso
+              %th Inscrito em
+              %th Status
+              %th Taxa de inscrição
+              %th Ações
+              %th Envio de projeto
+          %tbody
+            - @subscribes.each_with_index do |subscribe, index|
+              %tr
+                %td= index + 1
+                %td= subscribe.project_subscribe.project.title if subscribe.project_subscribe.present? && subscribe.project_subscribe.project.present? 
+                %td= subscribe.created_at.strftime('%d/%m/%Y às %H:%M')
+                %td= subscribe.status
+                %td
+                  - if subscribe.project_subscribe.fee
+                    = link_to "Emitir boleto", bank_slip_candidates_path(subscribe)
+                %td
+                  = link_to "visualizar", show_subscribe_candidates_path(subscribe)
+                %td
+

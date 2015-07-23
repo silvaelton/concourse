@@ -17,3 +17,7 @@ a, a:hover, a:focus {color: #E76025;}
 }
 
 .has-error .form-control, .has-error .form-control:focus { border: 1px solid #D21B1B }
+
+
+.title-opacity {color: rgb(189, 189, 189);}
+.project-link a {color: black;}

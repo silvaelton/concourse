@@ -2,6 +2,13 @@
   .row
     .col-md-12
       = f.input :name
+    .col-md-12
+      = f.input :cpf
+    .col-md-12
+      = f.input :telephone
+    .col-md-12
+      = f.input :teste
+  %hr/
   .row
     .col-md-12
-      = f.button :submit 
+      = f.submit "Realizar minha inscrição" , class: 'btn btn-warning'

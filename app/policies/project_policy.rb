@@ -5,15 +5,15 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def new?
-    user.administrator && user.manager?
+    user.administrator && user.master?
   end
 
   def edit?
-    user.administrator && user.manager?
+    user.administrator && user.master?
   end
 
   def destroy?
-    user.administrator && user.manager?
+    user.administrator && user.master?
   end
 
 end

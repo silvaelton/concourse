@@ -1,1 +1,9 @@
-= render "forms/partials/#{@subscribe.form_code}_form"
+.row
+  .col-md-12 
+    %h3 
+      %b Nova Inscrição
+    %small= @subscribe.title
+%hr/
+.row
+  .col-md-12 
+    = render "forms/partials/#{@subscribe.form_code}_form"

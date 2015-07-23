@@ -1,0 +1,12 @@
+.row
+  .col-md-12
+    %h3
+      %b Minhas Inscrições
+
+%hr/
+.row
+  .col-md-2
+  .col-md-10
+    .panel.panel-default
+      .panel-body
+        = render "candidates/partials/#{@subscribe.project_subscribe.form_code}_show"

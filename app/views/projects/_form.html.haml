@@ -9,6 +9,9 @@
     .col-md-12
       = f.input :description
   .row
+    .col-md-12
+      = f.input :apresentation
+  .row
     .col-md-3
       = f.input :start, as: 'string', input_html: { class: 'date',  value: (@project.start) ? localize(f.object.start) : nil}
     .col-md-3
