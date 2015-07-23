@@ -28,7 +28,7 @@
                 %td= subscribe.status
                 %td
                   - if subscribe.project_subscribe.fee
-                    = link_to "Emitir boleto", bank_slip_candidates_path(subscribe)
+                    = link_to "Emitir boleto", bank_slip_candidates_path(subscribe), target: '_blank'
                 %td
                   = link_to "visualizar", show_subscribe_candidates_path(subscribe)
                 %td
